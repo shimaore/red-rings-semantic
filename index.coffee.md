@@ -131,7 +131,7 @@ Cleanup
 
 The message is cleaned-up before being routed.
 
-    cleanup = (msg) ->
+    cleanup = (msg) -> msg.withMutations (msg) ->
 
 Re-import the meta-data from the document (this allows clients to only specify `.doc` in most cases).
 
@@ -140,33 +140,29 @@ Re-import the meta-data from the document (this allows clients to only specify `
         doc = msg.get 'doc'
       else
         msg = msg.set 'had_doc', false
-        doc = Immutable.Map {}
+        msg.set 'doc', Immutable.Map {}
 
 `.id` and `.doc._id` are equivalent
 
-      unless msg.has 'id'
-        if doc.has '_id'
-          msg = msg.set 'id', doc.get '_id'
+      if doc?.has '_id' and not msg.has 'id'
+        msg = msg.set 'id', doc.get '_id'
 
 `.rev` and `.doc._rev` are equivalent
 
-      unless msg.has 'rev'
-        if doc.has '_rev'
-          msg = msg.set 'rev', doc.get '_rev'
+      if doc?.has '_rev' and not msg.has 'rev'
+        msg = msg.set 'rev', doc.get '_rev'
 
 Deletion might be indicated in the message metadata, in the document's `_deleted` field, or by a operation on the `_deleted` json-path.
 
       unless msg.has 'deleted'
         msg = msg.set 'deleted', false
-      if doc.get '_deleted'
+      if doc?.get '_deleted'
         msg = msg.set 'deleted', true
 
-      doc = doc
-        .delete '_id'
-        .delete '_rev'
-        .delete '_deleted'
-
-      msg = msg.set 'doc', doc
+      msg
+      .removeIn ['doc','_id']
+      .removeIn ['doc','_rev']
+      .removeIn ['doc','_deleted']
 
     module.exports = changes_semantic
     Immutable = require 'immutable'
