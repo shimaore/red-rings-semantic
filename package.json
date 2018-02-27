@@ -1,0 +1,23 @@
+{
+  "name": "red-rings-semantic",
+  "version": "1.0.0",
+  "description": "Changes Semantics for red-rings",
+  "main": "index.js",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "npm install --only=dev && rm -f package-lock.json && coffee -c *.coffee.md",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/shimaore/red-rings-semantic"
+  },
+  "author": "shimaore",
+  "license": "Unlicense",
+  "dependencies": {
+    "immutable": "^4.0.0-rc.9"
+  },
+  "devDependencies": {
+    "coffeescript": "^2.2.2"
+  }
+}
