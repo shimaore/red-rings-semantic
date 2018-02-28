@@ -6,7 +6,7 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "npm install --only=dev && rm -f package-lock.json && coffee -c *.coffee.md",
-    "pretest": "npm run build && coffee -c test/*.coffee.md",
+    "pretest": "npm install && npm run build && coffee -c test/*.coffee.md",
     "test": "mocha"
   },
   "repository": {
@@ -16,12 +16,13 @@
   "author": "shimaore",
   "license": "Unlicense",
   "dependencies": {
-    "immutable": "^4.0.0-rc.9"
+    "abrasive-ducks-transducers": "^2.0.0",
+    "immutable": "^4.0.0-rc.9",
+    "red-rings": "^1.1.0"
   },
   "devDependencies": {
     "coffeescript": "^2.2.2",
     "mocha": "^5.0.1",
-    "most": "^1.7.3",
-    "red-rings": "^1.1.0"
+    "most": "^1.7.3"
   }
 }

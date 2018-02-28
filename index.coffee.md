@@ -106,7 +106,7 @@ Deletion.
 
     _delete = (msg) ->
       msg.get('deleted') and valid_rev(msg) and
-        not (msg.get('had_doc') or msg.get('operations'))
+        not msg.get('operations')
 
 Normalized:
 
