@@ -1,6 +1,6 @@
 {
   "name": "red-rings-semantic",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Changes Semantics for red-rings",
   "main": "index.js",
   "scripts": {
