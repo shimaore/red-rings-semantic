@@ -28,7 +28,6 @@ Transform
 All updates are cleaned through changes-semantic (which means at least that the document does not contain `_id`, `_rev`, nor `_deleted`).
 
     Routed = (source) ->
-      source = source.filter not_null
 
       cs = source
         .filter operation UPDATE
@@ -45,4 +44,4 @@ All updates are cleaned through changes-semantic (which means at least that the 
     changes_semantic = require './index'
     Immutable = require 'immutable'
     {UPDATE,NOTIFY,SUBSCRIBE,UNSUBSCRIBE} = require 'red-rings/operations'
-    {operation,not_null} = require 'abrasive-ducks-transducers'
+    {operation} = require 'abrasive-ducks-transducers'
