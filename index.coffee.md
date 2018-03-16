@@ -135,12 +135,13 @@ The message is cleaned-up before being routed.
 
 Re-import the meta-data from the document (this allows clients to only specify `.doc` in most cases).
 
-      if msg.has 'doc'
+      doc = msg.get 'doc' if msg.has 'doc'
+      if Immutable.Map.isMap doc
         msg = msg.set 'had_doc', true
-        doc = msg.get 'doc'
       else
         msg = msg.set 'had_doc', false
         msg.set 'doc', Immutable.Map {}
+        doc = null
 
 `.id` and `.doc._id` are equivalent
 
